@@ -44,22 +44,31 @@ int Partition(vector<int>& numbers, int i, int k) {
     return high;
 }
 
+// Quick Sort function
+void QuickSort(vector<int>& numbers, int i, int k) {
+    if (i >= k) {
+        return;
+    }
+
+    int j = Partition(numbers, i, k);
+
+    QuickSort(numbers, i, j);
+
+    QuickSort(numbers, j + 1, k);
+}
+
 int main() {
     vector<int> numbers = {10, 2, 78, 4, 45, 32, 7, 11};
 
-    cout << "Original: ";
+    cout << "Unsorted: ";
     for (int n : numbers) cout << n << " ";
     cout << endl;
 
-    int lastLeftIndex = Partition(numbers, 0, numbers.size() - 1);
+    QuickSort(numbers, 0, numbers.size() - 1);
 
-    cout << "After Partition: ";
+    cout << "Sorted:   ";
     for (int n : numbers) cout << n << " ";
     cout << endl;
-
-    cout << "Partition Index: " << lastLeftIndex << endl;
-    cout << "Left side ends at index " << lastLeftIndex << " (value: "
-    << numbers[lastLeftIndex] << ")" << endl;
 
     return 0;
 }
